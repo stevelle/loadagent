@@ -9,5 +9,5 @@ to install required python libs:
 to run: 
 ``python agent.py``
 
-query the / endpoint as a health check endpoint to ensure the agent is running
-query the /cpu endpoint to get % CPU used since last query
+* query the ``/`` endpoint as a health check endpoint to ensure the agent is running
+* query the ``/cpu`` endpoint to get % CPU used since last query
