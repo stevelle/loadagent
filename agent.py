@@ -21,14 +21,15 @@ class Agent():
     def run(self, debug=False):
         app.run(debug=debug)
 
+agent = Agent()
+
 @app.route('/')
 def index():
     return json.dumps({'hostname': agent.hostname})
 
 @app.route('/cpu')
 def cpu():
-    return json.dumps({'cpu_percent': agent.cpu()})
+    return str(agent.cpu())
 
 if __name__ == '__main__':
-    agent = Agent()
     agent.run(True)
