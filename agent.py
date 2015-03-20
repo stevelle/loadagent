@@ -13,9 +13,13 @@ class Agent():
         app = Flask(__name__)
         self.hostname = socket.gethostname()
         self.cpu() # initial call required to prepare the system
+        self.cheat_load = None
 
     @staticmethod
     def cpu():
+        if cheat_load:
+            return cheat_load
+            
         return psutil.cpu_percent(0)
 
     def run(self, debug=False):
@@ -31,18 +35,15 @@ def index():
 def cpu():
     return str(agent.cpu())
 
-
-from subprocess import call
+from flask import Request
 
 @app.route('/cheating/load', methods=['POST'])
 def add_load():
-    call('stress -c 1 &', shell=True) # FOR DEMO
-    return "Loading the CPU"
+    agent.cheat_load = float(Request.get_data(as_text=True))
 
 @app.route('/cheating/load', methods=['DELETE'])
 def remove_load():
-    call('killall stress', shell=True)
-    return ""
+    agent.cheat_load = None
 
 if __name__ == '__main__':
     agent.run(True)
