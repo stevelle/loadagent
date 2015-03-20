@@ -31,5 +31,16 @@ def index():
 def cpu():
     return str(agent.cpu())
 
+
+from subprocess import call
+
+@app.route('/cheating/load', methods=['POST'])
+def add_load():
+    call('stress -c 1 &', shell=True) # FOR DEMO
+
+@app.route('/cheating/load', methods=['DELETE'])
+def remove_load():
+    call('killall stress', shell=True)
+
 if __name__ == '__main__':
     agent.run(True)
