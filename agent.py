@@ -15,7 +15,7 @@ class Agent():
         self.cpu() # initial call required to prepare the system
 
     @staticmethod
-    def cpu(self):
+    def cpu():
         return psutil.cpu_percent(0)
 
     def run(self, debug=False):
