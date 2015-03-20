@@ -11,12 +11,12 @@ app = Flask(__name__)
 class Agent():
     def __init__(self, *args, **kwargs):
         app = Flask(__name__)
-        self.p = psutil.Process(os.getpid())
         self.hostname = socket.gethostname()
         self.cpu() # initial call required to prepare the system
 
+    @staticmethod
     def cpu(self):
-        return self.p.get_cpu_percent(0)
+        return psutil.cpu_percent(0)
 
     def run(self, debug=False):
         app.run(debug=debug)
