@@ -12,13 +12,12 @@ class Agent():
     def __init__(self, *args, **kwargs):
         app = Flask(__name__)
         self.hostname = socket.gethostname()
-        self.cpu() # initial call required to prepare the system
         self.cheat_load = None
+        self.cpu() # initial call required to prepare the system
 
-    @staticmethod
-    def cpu():
-        if cheat_load:
-            return cheat_load
+    def cpu(self):
+        if self.cheat_load:
+            return self.cheat_load
             
         return psutil.cpu_percent(0)
 
@@ -40,10 +39,12 @@ from flask import request
 @app.route('/cheating/load', methods=['POST'])
 def add_load():
     agent.cheat_load = float(request.get_data(as_text=True))
+    return ""
 
 @app.route('/cheating/load', methods=['DELETE'])
 def remove_load():
     agent.cheat_load = None
+    return ""
 
 if __name__ == '__main__':
     agent.run(True)
