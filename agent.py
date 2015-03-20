@@ -35,11 +35,11 @@ def index():
 def cpu():
     return str(agent.cpu())
 
-from flask import Request
+from flask import request
 
 @app.route('/cheating/load', methods=['POST'])
 def add_load():
-    agent.cheat_load = float(Request.get_data(as_text=True))
+    agent.cheat_load = float(request.get_data(as_text=True))
 
 @app.route('/cheating/load', methods=['DELETE'])
 def remove_load():
